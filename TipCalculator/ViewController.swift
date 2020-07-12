@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-          printUIElements()
     }
     
     @IBOutlet weak var amountTextField: UITextField!
@@ -30,18 +29,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipOutlet: UILabel!
     @IBOutlet weak var totalCostOutlet: UILabel!
     @IBOutlet weak var costPerPersonOutlet: UILabel!
-    
-    
-    var foodCost = 0.0
-    
-    var tipPercent = 0.0
-    
-    var tipCost = 0.0
-    
-    var totalCost = 0.0
-    
-    var costPerPerson = 0.0
-    
+
     
     @IBAction func percentSlider(_ sender: UISlider) {
         sender.maximumValue = 100
@@ -58,16 +46,19 @@ class ViewController: UIViewController {
     }
     
     func calculate(){
+       
         
     }
    
     
-    func createAMessageWindow(message :String){
-        
+    @IBAction func calculate(_ sender: UIButton) {
+        var percentLabel = Float(String(Substring(percentageLabel.text!).dropLast()))!
+        var actualBill = amountTextField.text!
+        if(actualBill != nil){
+            tipOutlet.text = String(Float(Double(actualBill)!) * Float(percentLabel))
+        }else{
+            UIAlertAction()
+        }
     }
     
-    func printUIElements(){
-        tipOutlet.text = ""
-    }
 }
-
