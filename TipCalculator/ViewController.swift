@@ -47,13 +47,19 @@ class ViewController: UIViewController {
    
     
     @IBAction func calculate(_ sender: UIButton) {
-        let percentLabel = Float(String(Substring(percentageLabel.text!).dropLast()))!
-        let actualBill = amountTextField.text!
-        
-        if(actualBill != nil || percentLabel != nil){
-            calculateTip(percentLabel: percentLabel, actualBill: actualBill)
+        if(amountTextField.text != "" && numberPeople.text != ""){
+            let percentLabel = Float(String(Substring(percentageLabel.text ?? "0").dropLast()))
+                let  actualBill = amountTextField.text!
+            calculateTip(percentLabel: percentLabel ?? 0.0, actualBill: actualBill ?? "0")
         }else{
-           print("56")
+         var dialogMessage = UIAlertController(title: "Mandatory Fields", message: "Please complete all the fields", preferredStyle: .alert)
+         
+         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+          })
+         
+         dialogMessage.addAction(ok)
+
+         self.present(dialogMessage, animated: true, completion: nil)
         }
     }
     
