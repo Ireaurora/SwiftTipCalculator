@@ -44,21 +44,36 @@ class ViewController: UIViewController {
         percentageLabel.text = sender.titleLabel!.text
         percentageSlider.value = Float(String(Substring(sender.titleLabel!.text!).dropLast())) ?? 0.0
     }
-    
-    func calculate(){
-       
-        
-    }
    
     
     @IBAction func calculate(_ sender: UIButton) {
-        var percentLabel = Float(String(Substring(percentageLabel.text!).dropLast()))!
-        var actualBill = amountTextField.text!
-        if(actualBill != nil){
-            tipOutlet.text = String(Float(Double(actualBill)!) * Float(percentLabel))
+        let percentLabel = Float(String(Substring(percentageLabel.text!).dropLast()))!
+        let actualBill = amountTextField.text!
+        
+        if(actualBill != nil || percentLabel != nil){
+            calculateTip(percentLabel: percentLabel, actualBill: actualBill)
         }else{
-            UIAlertAction()
+           print("56")
         }
+    }
+    
+    func calculateTip(percentLabel: Float, actualBill:String){
+         let tip = Float(Double(actualBill)!) * Float(percentLabel)/100
+        tipOutlet.text = String(tip)
+        calculateTotalCost(tip: tip, actualBill: actualBill)
+      }
+    
+    
+    func calculateTotalCost(tip:Float, actualBill:String){
+        totalCostOutlet.text = String(Float(Double(tip)) + Float(actualBill)!)
+        let total = Float(Double(tip)) + Float(actualBill)!
+        calculateCostPerson(total:actualBill)
+    }
+    
+    func calculateCostPerson(total : String){
+        let number = numberPeople.text!
+        print(total, number)
+        costPerPersonOutlet.text = String(Float(Double(total)!) / Float(number)!)
     }
     
 }
